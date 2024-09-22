@@ -1,7 +1,8 @@
 <center><h1>Ker-Ass</h1></center>
+
 <center>
-Google and François... I'm sorry...<br>
-HomeMade Deep Learning Framework for dummies.<br>
+<p align="center">Google and François... I'm sorry...</p>
+<p align="center">HomeMade Deep Learning Framework for dummies.</p><br>
 <img src="Media/logo.png" width=10%>
 </center>
 
