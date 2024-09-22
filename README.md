@@ -1,9 +1,9 @@
-<center><h1>Ker-Ass</h1></center>
+<h1><p align="center">Ker-Ass</p></h1>
 
 <center>
 <p align="center">Google and François... I'm sorry...</p>
 <p align="center">HomeMade Deep Learning Framework for dummies.</p><br>
-<img src="Media/logo.png" width=10%>
+<p align="center"><img src="Media/logo.png" width=15%></p>
 </center>
 
 ---
