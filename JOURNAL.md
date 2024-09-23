@@ -8,3 +8,7 @@ Plan:<br>
 
 > Models:
 > - Sequential
+
+23.09.2024 - Dense Layer Forward/Backward<br>
+Implemented Dense layer basis class + quickly coded some basic activations.<br>
+I find my Dense Layer class pretty pretty.
