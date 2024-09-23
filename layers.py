@@ -1,3 +1,11 @@
+"""
+Layers Framework block.
+Contains core layers for different purposes.
+Source code by Venchislaw 2024.
+MIT License.
+"""
+
+
 import numpy as np
 
 from activations import activations_map, diff_act_map
@@ -47,3 +55,18 @@ tmp = dense_layer.weights.copy()
 grad, w = dense_layer.backward(np.random.randn(10, 1_000), last=True, Y=np.random.randn(10, 1_000))
 
 print(tmp[0][0], dense_layer.weights[0][0])
+
+
+"""
+Reflection:
+
+I'm sort of satisfied, but at the same time: "is it optimal solution?" scratches my brain.
+I mean, I'm not quite sure it's a good way to explicitly check whether layer is the last one or not.
+Anyway, I think that's all for today.
+
+Tomorrow/Anytime else:
+1) differentiate other activations
+2) add basic loss functions
+3) Implement Sequential API (basis)
+4) Train Net with it.
+"""
