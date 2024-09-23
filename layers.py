@@ -1,5 +1,5 @@
 import numpy as np
-from activations import activations_map
+from activations import activations_map, diff_act_map
 
 class Dense:
     def __init__(self, n_neurons, activation="linear"):
@@ -11,17 +11,35 @@ class Dense:
         self.X = None
 
 
-    def forward_prop(self, X):
+    def forward(self, X):
         if not self.weights:
             n_samples, n_features = X.shape
             self.weights = np.random.randn(self.n_neurons, n_features)
         self.X = X.T
 
-        z = np.dot(self.weights, self.X) + self.bias
-        a = activations_map[self.activation](z)
-        return a
+        self.z = np.dot(self.weights, self.X) + self.bias
+        self.a = activations_map[self.activation](self.z)
+        return self.a
 
+
+    def backward(self, output_grad, last=False, previous_w=None, Y=None, learning_rate=0.01):
+        if not last:
+            da = np.dot(output_grad, previous_w)
+            dz = da * diff_act_map[self.activation](self.z)
+            dw = np.dot(dz, self.X.T)
+        else:
+            da = Y - self.a
+            dz = da * diff_act_map[self.activation](self.z)
+            dw = np.dot(dz, self.X.T)
+
+        # update
+        self.weights -= learning_rate * dw
+        self.bias -= learning_rate * np.sum(output_grad)
+
+        return output_grad
 
 dense_layer = Dense(10, "ReLU")
-res = dense_layer.forward_prop(np.random.randn(1_000, 30))
+res = dense_layer.forward(np.random.randn(1_000, 30))
 print(res.min())  # 0.0
+grad = dense_layer.backward(np.random.randn(10, 1_000), last=True, Y=np.random.randn(10, 1_000))
+print(grad)

@@ -15,3 +15,13 @@ activations_map = {
     "sigmoid": sigmoid,
     "softmax": softmax,
 }
+
+def relu_b(z):
+    return z > 0
+
+diff_act_map = {
+    "linear": lambda z: 1,
+    "relu": relu_b,
+    "sigmoid": sigmoid,
+    "softmax": softmax,
+}
