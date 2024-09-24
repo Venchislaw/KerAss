@@ -65,7 +65,7 @@ I mean, I'm not quite sure it's a good way to explicitly check whether layer is 
 Anyway, I think that's all for today.
 
 Tomorrow/Anytime else:
-1) differentiate other activations
+1) differentiate other activations (done)
 2) add basic loss functions
 3) Implement Sequential API (basis)
 4) Train Net with it.
