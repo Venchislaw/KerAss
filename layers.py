@@ -5,7 +5,6 @@ Source code by Venchislaw 2024.
 MIT License.
 """
 
-
 import numpy as np
 
 from activations import activations_map, diff_act_map
