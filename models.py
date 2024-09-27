@@ -11,26 +11,31 @@ class Sequential:
 
     def compile(self, optimizer="sgd", loss="mse"):
         self.optimizer = optimizer
-        self.loss = loss
+        self.loss = loss_map[loss]
 
     def fit(self, X, y):
         # forward pass:
         output = X.T
         for layer in self.layers:
             output = layer.forward(output)
-        for layer in reversed(self.layers + [loss_map[self.loss]]):
-            # pozhe
+            print(output.shape)
+
+        loss_value = self.loss.forward(y, output)
+        output_grad = self.loss.backward()
+        for layer in reversed(self.layers):
+            output_grad = layer.backward(output_grad)
+
         return output
 
 x = np.random.randn(10_000, 20)
 y = np.random.choice(2, 10_000)
+y = y.reshape(1, -1)
+print(y.shape)
 
 seq = Sequential([
     Dense(10, "relu"),
     Dense(30, "relu"),
     Dense(1, "sigmoid")
 ])
-
-
+seq.compile("sgd", "cat_crossentropy")
 output = seq.fit(x, y)
-print(output)

@@ -32,13 +32,14 @@ class Dense:
 
 
     def backward(self, output_grad, last=False, previous_w=None, Y=None, learning_rate=0.01):
-        if not last:
+        """if not last:
             da = np.dot(output_grad, previous_w)
             dz = da * diff_act_map[self.activation](self.z)
         else:
             da = Y - self.a
-            dz = da * diff_act_map[self.activation](self.z)
+            dz = da * diff_act_map[self.activation](self.z)"""
 
+        dz = output_grad * diff_act_map[self.activation](self.z)
         dw = np.dot(dz, self.X.T)  # Calculate gradient of weights correctly
         db = np.sum(dz, axis=1, keepdims=True)  # Correct gradient calculation for biases
 
@@ -46,7 +47,7 @@ class Dense:
         self.weights -= learning_rate * dw
         self.bias -= learning_rate * db
 
-        return dz, self.weights
+        return dz
 
 
 """
