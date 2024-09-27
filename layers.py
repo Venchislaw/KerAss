@@ -31,7 +31,7 @@ class Dense:
         return self.a
 
 
-    def backward(self, output_grad, last=False, previous_w=None, Y=None, learning_rate=0.01):
+    def backward(self, output_grad, learning_rate=0.01):
         """if not last:
             da = np.dot(output_grad, previous_w)
             dz = da * diff_act_map[self.activation](self.z)

@@ -1,3 +1,10 @@
+"""
+Models Framework block.
+Contains core model APIs.
+Source code by Venchislaw 2024.
+MIT License.
+"""
+
 from layers import Dense
 import numpy as np
 from losses import loss_map
@@ -38,4 +45,12 @@ seq = Sequential([
     Dense(1, "sigmoid")
 ])
 seq.compile("sgd", "cat_crossentropy")
-output = seq.fit(x, y)
+output = seq.fit(x, y)  # causes error (error in Dense/backprop) - fix it pls
+
+
+"""
+Problem of the day:
+Fucking dimension mismatch.
+When calculating dz on backward with elementwise multiplication of activation derivative with output grad.
+Gotta go through backprop entirely on paper (math part) 
+"""

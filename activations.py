@@ -1,3 +1,10 @@
+"""
+Activations Framework block.
+Contains core non-liniarities for activations purposes.
+Source code by Venchislaw 2024.
+MIT License.
+"""
+
 import numpy as np
 
 def relu(z):
