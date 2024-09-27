@@ -47,14 +47,6 @@ class Dense:
 
         return dz, self.weights
 
-dense_layer = Dense(10, "ReLU")
-res = dense_layer.forward(np.random.randn(1_000, 30))
-print(res.min())  # 0.0
-tmp = dense_layer.weights.copy()
-grad, w = dense_layer.backward(np.random.randn(10, 1_000), last=True, Y=np.random.randn(10, 1_000))
-
-print(tmp[0][0], dense_layer.weights[0][0])
-
 
 """
 Reflection:
@@ -65,7 +57,7 @@ Anyway, I think that's all for today.
 
 Tomorrow/Anytime else:
 1) differentiate other activations (done)
-2) add basic loss functions
+2) add basic loss functions (done)
 3) Implement Sequential API (basis)
 4) Train Net with it.
 """

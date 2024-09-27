@@ -59,3 +59,22 @@ class CategoricalCrossentropy(Loss):
     def backward(self):
         return 1 / self.m * (self.a - self.y_true)
 
+
+# kinda dumb, as I don't have separate SparseCat and BinCat class
+# and I have different keys mapped to the same loss
+loss_map = {
+    "mse": MeanSquaredError(),
+    "mean_squared_error": MeanSquaredError(),
+    "meansquarederror": MeanSquaredError(),
+    "mae": MeanAbsoluteError(),
+    "mean_absolute_error": MeanAbsoluteError(),
+    "meanabsolutederror": MeanAbsoluteError(),
+    "categorical": CategoricalCrossentropy(),
+    "cat_crossentropy": CategoricalCrossentropy(),
+    "categorical_crossentropy": CategoricalCrossentropy(),
+    "sparse_categorical": CategoricalCrossentropy(),
+    "sparse_cat_entropy": CategoricalCrossentropy(),
+    "sparse_categorical_crossentropy": CategoricalCrossentropy(),
+    "binary_crossentropy": CategoricalCrossentropy(),
+    "bce": CategoricalCrossentropy()
+}
