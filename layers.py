@@ -21,9 +21,10 @@ class Dense:
 
     def forward(self, X):
         if not self.weights:
-            n_samples, n_features = X.shape
+            # data is transposed
+            n_features, n_samples  = X.shape
             self.weights = np.random.randn(self.n_neurons, n_features)
-        self.X = X.T
+        self.X = X
 
         self.z = np.dot(self.weights, self.X) + self.bias
         self.a = activations_map[self.activation](self.z)
