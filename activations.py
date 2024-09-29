@@ -31,9 +31,16 @@ def relu_b(z):
 def sigmoid_b(z):
     return sigmoid(z) * (1 - sigmoid(z))
 
-def softmax_b(z):
+def softmax_b(z, output_grad):
     # s = softmax(z).reshape(-1, 1)
     # return np.diagflat(s) - np.dot(s, s.T)
+    # return 1
+    #output = softmax(z)
+    #print(np.size(output))
+    #n = np.size(output)
+    #print("N: ", n)
+    #print("SHAPEOFIDENTITY", np.identity(n).shape)
+    #return np.dot((np.identity(n) - output.T) * output, output_grad)
     return 1
 
 def tanh_b(x):

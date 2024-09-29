@@ -20,7 +20,7 @@ class Sequential:
         self.optimizer = optimizer
         self.loss = loss_map[loss]
 
-    def fit(self, X, y, epochs=1_000, verbosity_step=100):
+    def fit(self, X, y, epochs=1_000, verbosity_step=100, learning_rate=0.001):
         # forward pass:
 
 
@@ -33,7 +33,7 @@ class Sequential:
             loss_value = self.loss.forward(y, output)
             output_grad = self.loss.backward()
             for layer in reversed(self.layers):
-                output_grad = layer.backward(output_grad)
+                output_grad = layer.backward(output_grad, learning_rate)
 
             if epoch % verbosity_step == 0:
                 print(f"Epoch: {epoch} | Loss: {loss_value}")

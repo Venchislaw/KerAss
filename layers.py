@@ -38,10 +38,12 @@ class Dense:
         else:
             da = Y - self.a
             dz = da * diff_act_map[self.activation](self.z)"""
-        # print(f"Output Grad: {output_grad.shape} | Differentiation Grad: {diff_act_map[self.activation](self.z).shape} | Neurons: {self.n_neurons}")
-        dz = output_grad * diff_act_map[self.activation](self.z)
+        if self.activation == "softmax":
+            dz = output_grad * diff_act_map[self.activation](self.z, output_grad)
+        else:
+            dz = output_grad * diff_act_map[self.activation](self.z)
         input_grad = np.dot(self.weights.T, output_grad)
-        # dz = np.dot(self.weights.T, output_grad)
+        
         dw = np.dot(dz, self.X.T)  # Calculate gradient of weights correctly
         db = np.sum(dz, axis=1, keepdims=True)  # Correct gradient calculation for biases
 
