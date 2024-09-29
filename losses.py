@@ -57,7 +57,9 @@ class CategoricalCrossentropy(Loss):
         return self.loss_value
 
     def backward(self):
-        return 1 / self.m * (self.a - self.y_true)
+        da = 1 / self.m * (self.a - self.y_true)
+        # da = ((1 - self.y_true) / (1 - self.a) - self.y_true / self.a) / np.size(self.y_true)
+        return da
 
 
 # kinda dumb, as I don't have separate SparseCat and BinCat class
