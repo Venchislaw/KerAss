@@ -32,8 +32,12 @@ class Sequential:
 
             loss_value = self.loss.forward(y, output)
             output_grad = self.loss.backward()
+            # print("LOSS OUTPUT GRAD: ", output_grad)
+            # laya = len(self.layers)
             for layer in reversed(self.layers):
                 output_grad = layer.backward(output_grad, learning_rate)
+                # print(f"Layer: {laya}: {output_grad}")
+                # laya -= 1
 
             if epoch % verbosity_step == 0:
                 print(f"Epoch: {epoch} | Loss: {loss_value}")

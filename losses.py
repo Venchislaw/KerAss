@@ -53,11 +53,11 @@ class CategoricalCrossentropy(Loss):
     def forward(self, y_true, a):
         super().forward(y_true, a)
         a = np.clip(a, 1e-12, 1. - 1e-12)
-        self.loss_value = 1 / self.m * -np.sum(y_true * np.log(a), axis=1)
+        self.loss_value = 1 / self.m * -np.sum(y_true * np.log(a))
         return self.loss_value
 
     def backward(self):
-        da = 1 / self.m * (self.a - self.y_true)
+        da = (self.a - self.y_true) / self.m
         # da = ((1 - self.y_true) / (1 - self.a) - self.y_true / self.a) / np.size(self.y_true)
         return da
 

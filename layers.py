@@ -6,8 +6,8 @@ MIT License.
 """
 
 import numpy as np
-
 from activations import activations_map, diff_act_map
+
 
 class Dense:
     def __init__(self, n_neurons, activation="linear"):
@@ -23,7 +23,9 @@ class Dense:
         if self.weights is None:
             # data is transposed
             n_features, n_samples  = X.shape
-            self.weights = np.random.randn(self.n_neurons, n_features)
+            self.weights = self.weights = np.random.random((self.n_neurons, n_features)) *\
+                                          np.sqrt(1. / n_features)
+
         self.X = X
 
         self.z = np.dot(self.weights, self.X) + self.bias
@@ -40,17 +42,18 @@ class Dense:
             dz = da * diff_act_map[self.activation](self.z)"""
         if self.activation == "softmax":
             dz = output_grad * diff_act_map[self.activation](self.z, output_grad)
+            #dz = output_grad
         else:
             dz = output_grad * diff_act_map[self.activation](self.z)
         input_grad = np.dot(self.weights.T, output_grad)
         
-        dw = np.dot(dz, self.X.T)  # Calculate gradient of weights correctly
-        db = np.sum(dz, axis=1, keepdims=True)  # Correct gradient calculation for biases
+        dw = np.dot(dz, self.X.T)
+        db = np.sum(dz, axis=1, keepdims=True)
 
         # Update weights and biases
         self.weights -= learning_rate * dw
         self.bias -= learning_rate * db
-
+        input_grad = np.clip(input_grad, -1, 1)
         return input_grad
 
 
