@@ -22,7 +22,7 @@ class Dense:
     def forward(self, X):
         if self.weights is None:
             # data is transposed
-            n_features, n_samples  = X.shape
+            n_features, self.n_samples  = X.shape
             self.weights = self.weights = np.random.random((self.n_neurons, n_features)) *\
                                           np.sqrt(1. / n_features)
 
@@ -45,10 +45,10 @@ class Dense:
             #dz = output_grad
         else:
             dz = output_grad * diff_act_map[self.activation](self.z)
-        input_grad = np.dot(self.weights.T, output_grad)
+        input_grad = np.dot(self.weights.T, dz)
         
-        dw = np.dot(dz, self.X.T)
-        db = np.sum(dz, axis=1, keepdims=True)
+        dw = 1 / self.n_samples * np.dot(dz, self.X.T)
+        db = 1 / self.n_samples * np.sum(dz, axis=1, keepdims=True)
 
         # Update weights and biases
         self.weights -= learning_rate * dw
